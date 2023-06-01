@@ -1,6 +1,6 @@
 <form x-data="user" @submit.prevent="onSubmit" class="grid md:grid-cols-2 xl:grid-cols-3">
     <section class="flex flex-col gap-4 p-4">
-        <h1>基本情報</h1>
+        <h2>基本情報</h2>
 
         <x-user.create.partials.input x-model="email">
             {{ __('validation.attributes.email') }}
@@ -27,8 +27,95 @@
             {{ __('validation.attributes.employee_number') }}
         </x-user.create.partials.input>
     </section>
-    <section>2</section>
-    <section>3</section>
+
+    <section class="flex flex-col gap-4 p-4">
+        <h2>就労条件</h2>
+
+        <!-- todo: make booleans / switch -->
+        <x-user.create.partials.input x-model="salary_type">
+            {{ __('validation.attributes.salary_type') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="staff_type">
+            {{ __('validation.attributes.staff_type') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="work_system">
+            {{ __('validation.attributes.work_system') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="daily_hours">
+            {{ __('validation.attributes.daily_hours') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="has_parking_spot">
+            {{ __('validation.attributes.has_parking_spot') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="has_meal">
+            {{ __('validation.attributes.has_meal') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="has_break">
+            {{ __('validation.attributes.has_break') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="has_health_insurance">
+            {{ __('validation.attributes.has_health_insurance') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="has_welfare_pension">
+            {{ __('validation.attributes.has_welfare_pension') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="has_nursing_insurance">
+            {{ __('validation.attributes.has_nursing_insurance') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="has_unemployment_insurance">
+            {{ __('validation.attributes.has_unemployment_insurance') }}
+        </x-user.create.partials.input>
+    </section>
+
+    <section class="flex flex-col gap-4 p-4">
+        <h2>給与オプション</h2>
+
+        <x-user.create.partials.input x-model="monthly_employee_base_salary">
+            {{ __('validation.attributes.monthly_employee_base_salary') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="monthly_employee_base_salary_hourly">
+            {{ __('validation.attributes.monthly_employee_base_salary_hourly') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="hourly_employee_base_salary">
+            {{ __('validation.attributes.hourly_employee_base_salary') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="treatment_improvement_1">
+            {{ __('validation.attributes.treatment_improvement_1') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="treatment_improvement_2">
+            {{ __('validation.attributes.treatment_improvement_2') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="position_allowance">
+            {{ __('validation.attributes.position_allowance') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="job_title_allowance">
+            {{ __('validation.attributes.job_title_allowance') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="qualification_allowance">
+            {{ __('validation.attributes.qualification_allowance') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="housing_allowance">
+            {{ __('validation.attributes.housing_allowance') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="dependent_care_allowance">
+            {{ __('validation.attributes.dependent_care_allowance') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="commuting_allowance_monthly">
+            {{ __('validation.attributes.commuting_allowance_monthly') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="commuting_allowance_workdays">
+            {{ __('validation.attributes.commuting_allowance_workdays') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="municipal_inhabitant_tax">
+            {{ __('validation.attributes.municipal_inhabitant_tax') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="refund_of_withholding_tax">
+            {{ __('validation.attributes.refund_of_withholding_tax') }}
+        </x-user.create.partials.input>
+        <x-user.create.partials.input x-model="income_tax">
+            {{ __('validation.attributes.income_tax') }}
+        </x-user.create.partials.input>
+    </section>
     <section>
         <button type="submit">SUBMIT</button>
     </section>
@@ -83,7 +170,8 @@
                 'income_tax': @this.entangle('income_tax').defer,
 
                 onSubmit: () => {
-                    @this.onSubmit();
+                    @this.
+                    onSubmit();
                 },
             }));
         });
