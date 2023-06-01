@@ -3,8 +3,13 @@
      x-model="{{ $attributes->get('x-model') }}"
      class="flex flex-col">
     <label for="{{$attributes->get('x-model')}}"
-           @click="$refs.toggle.click(); $refs.toggle.focus();">
+           @click="$refs.toggle.click(); $refs.toggle.focus();"
+           class="flex justify-between">
         <span>{{ $slot }}</span>
+
+        @if($attributes->has('required'))
+            <span class="text-red-500 ml-4">必須</span>
+        @endif
     </label>
 
     <input type="hidden"
