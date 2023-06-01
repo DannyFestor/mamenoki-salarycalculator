@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
+
     public string $email;
     public string $last_name;
     public string $first_name;
@@ -44,5 +45,18 @@ class Create extends Component
     public function render()
     {
         return view('livewire.user.create');
+    }
+
+    protected function rules(): array
+    {
+        return array_merge_recursive(
+            (new \App\Http\Requests\User\CreateRequest())->rules(),
+            (new \App\Http\Requests\UserData\CreateRequest())->rules(),
+        );
+    }
+
+    public function onSubmit(): void
+    {
+        $this->validate();
     }
 }
