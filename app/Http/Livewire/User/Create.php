@@ -19,13 +19,13 @@ class Create extends Component
     public int $staff_type;
     public int $work_system;
     public float $daily_hours;
-    public bool $has_parking_spot;
-    public bool $has_meal;
-    public bool $has_break;
-    public bool $has_health_insurance;
-    public bool $has_welfare_pension;
-    public bool $has_nursing_insurance;
-    public bool $has_unemployment_insurance;
+    public bool $has_parking_spot = false;
+    public bool $has_meal = false;
+    public bool $has_break = false;
+    public bool $has_health_insurance = false;
+    public bool $has_welfare_pension = false;
+    public bool $has_nursing_insurance = false;
+    public bool $has_unemployment_insurance = false;
     public int $monthly_employee_base_salary;
     public int $monthly_employee_base_salary_hourly;
     public int $hourly_employee_base_salary;
@@ -47,16 +47,16 @@ class Create extends Component
         return view('livewire.user.create');
     }
 
+    public function onSubmit(): void
+    {
+        $this->validate();
+    }
+
     protected function rules(): array
     {
         return array_merge_recursive(
             (new \App\Http\Requests\User\CreateRequest())->rules(),
             (new \App\Http\Requests\UserData\CreateRequest())->rules(),
         );
-    }
-
-    public function onSubmit(): void
-    {
-        $this->validate();
     }
 }

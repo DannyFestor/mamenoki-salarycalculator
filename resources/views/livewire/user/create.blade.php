@@ -44,27 +44,27 @@
         <x-user.create.partials.input x-model="daily_hours">
             {{ __('validation.attributes.daily_hours') }}
         </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="has_parking_spot">
+        <x-user.create.partials.toggle x-model="has_parking_spot">
             {{ __('validation.attributes.has_parking_spot') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="has_meal">
+        </x-user.create.partials.toggle>
+        <x-user.create.partials.toggle x-model="has_meal">
             {{ __('validation.attributes.has_meal') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="has_break">
+        </x-user.create.partials.toggle>
+        <x-user.create.partials.toggle x-model="has_break">
             {{ __('validation.attributes.has_break') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="has_health_insurance">
+        </x-user.create.partials.toggle>
+        <x-user.create.partials.toggle x-model="has_health_insurance">
             {{ __('validation.attributes.has_health_insurance') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="has_welfare_pension">
+        </x-user.create.partials.toggle>
+        <x-user.create.partials.toggle x-model="has_welfare_pension">
             {{ __('validation.attributes.has_welfare_pension') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="has_nursing_insurance">
+        </x-user.create.partials.toggle>
+        <x-user.create.partials.toggle x-model="has_nursing_insurance">
             {{ __('validation.attributes.has_nursing_insurance') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="has_unemployment_insurance">
+        </x-user.create.partials.toggle>
+        <x-user.create.partials.toggle x-model="has_unemployment_insurance">
             {{ __('validation.attributes.has_unemployment_insurance') }}
-        </x-user.create.partials.input>
+        </x-user.create.partials.toggle>
     </section>
 
     <section class="flex flex-col gap-4 p-4">
