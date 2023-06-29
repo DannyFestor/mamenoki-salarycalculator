@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\User;
-use App\Models\UserData;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Redirector;
 
 class Edit extends Base
 {
     public int $user_id;
+
     public int $user_data_id;
 
     public function mount(User $user)
@@ -52,7 +52,6 @@ class Edit extends Base
         $this->refund_of_withholding_tax = $user->userData->refund_of_withholding_tax;
         $this->income_tax = $user->userData->income_tax;
     }
-
 
     public function onSubmit(): Redirector|RedirectResponse|null
     {
