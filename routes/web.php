@@ -28,9 +28,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// TODO: Add to middleware
-Route::get('/users', \App\Http\Controllers\User\IndexController::class)->name('user.index');
-Route::get('/users/create', \App\Http\Controllers\User\CreateController::class)->name('user.create');
-Route::get('/users/{user:uuid}', \App\Http\Controllers\User\EditController::class)->name('user.edit');
+Route::group(['name' => 'schools', 'as' => 'schools.', 'prefix' => '/schools'], function () {
+    Route::get('/', \App\Http\Controllers\School\IndexController::class)->name('index');
+    Route::get('/create', \App\Http\Controllers\School\CreateController::class)->name('create');
+    Route::get('/{school:uuid}', \App\Http\Controllers\School\EditController::class)->name('edit');
+    Route::group(['name' => 'users', 'as' => 'users.', 'prefix' => '{school:uuid}/users'], function () {
+        Route::get('/', \App\Http\Controllers\User\IndexController::class)->name('index');
+        Route::get('/create', \App\Http\Controllers\User\CreateController::class)->name('create');
+        Route::get('/{user:uuid}', \App\Http\Controllers\User\EditController::class)->name('edit');
+    });
+});
 
-require __DIR__.'/auth.php';
+// TODO: Add to middleware
+
+require __DIR__ . '/auth.php';

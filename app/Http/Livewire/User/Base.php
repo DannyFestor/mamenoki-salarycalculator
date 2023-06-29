@@ -8,6 +8,8 @@ use Livewire\Redirector;
 
 abstract class Base extends Component
 {
+    public string $school_uuid;
+
     public string $email;
 
     public string $last_name;

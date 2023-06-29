@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\School;
 use App\Models\User;
 use App\Models\UserData;
 use Illuminate\Http\RedirectResponse;
@@ -9,6 +10,11 @@ use Livewire\Redirector;
 
 class Create extends Base
 {
+    public function mount(School $school)
+    {
+        $this->school_uuid = $school->uuid;
+    }
+
     public function onSubmit(): Redirector|RedirectResponse|null
     {
         $validated = collect($this->validate());
@@ -18,8 +24,16 @@ class Create extends Base
         \DB::beginTransaction();
 
         try {
+            $school = School::query()
+                ->where('uuid', '=', $this->school_uuid)
+                ->first();
+            if (!$school) {
+                throw new \Exception('No school found: ' . $this->school_uuid);
+            }
+
             $user = User::create([
                 ...$validated->only(['email']),
+                'school_id' => $school->id,
                 'password' => bcrypt($password),
             ]);
 
@@ -29,7 +43,10 @@ class Create extends Base
             ]);
             \DB::commit();
 
-            return redirect()->route('user.edit', ['user' => $user])->with('success', 'ユーザを作成しました。');
+            return redirect()->route('schools.users.index', ['school' => $this->school_uuid])->with(
+                'success',
+                'ユーザを作成しました。'
+            );
         } catch (\Exception $e) {
             logger()->error($e->getMessage());
             logger()->error($e->getTraceAsString());
