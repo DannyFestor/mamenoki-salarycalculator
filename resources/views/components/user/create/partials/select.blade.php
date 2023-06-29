@@ -1,4 +1,4 @@
-@props(['options'])
+@props(['options', 'enum' => null])
 
 <div x-data="select"
      x-modelable="data"
@@ -16,7 +16,11 @@
     <select x-model="data"
             class="form-select rounded mt-2">
         @foreach($options as $value => $label)
-            <option value="{{ $value }}">{{ $label }}</option>
+            @if($enum !== null)
+                <option value="{{ $value }}">{{ __('enums.' . $enum . '.' . $label) }}</option>
+            @else
+                <option value="{{ $value }}">{{ $label }}</option>
+            @endif
         @endforeach
     </select>
 

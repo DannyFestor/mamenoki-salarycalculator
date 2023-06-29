@@ -14,6 +14,14 @@
     <body class="font-sans antialiased">
         @include('layouts.navigation')
 
+        @if(session()->has('success'))
+            <section class="my-4 px-4 py-2">
+                <article class="border-2 border-emerald-600 bg-emerald-400 bg-opacity-50 text-emerald-800 font-bold px-4 py-2 rounded">
+                    {{ session()->get('success') }}
+                </article>
+            </section>
+        @endif
+
         <main>
             {{ $slot }}
         </main>

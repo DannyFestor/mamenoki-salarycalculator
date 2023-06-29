@@ -31,13 +31,16 @@
     <section class="flex flex-col gap-4 p-4">
         <h2>就労条件</h2>
 
-        <x-user.create.partials.select x-model="salary_type" :options="\App\Enums\SalaryType::toArray()" required>
+        <x-user.create.partials.select x-model="salary_type" :enum="\App\Enums\SalaryType::class"
+                                       :options="\App\Enums\SalaryType::toArray()" required>
             {{ __('validation.attributes.salary_type') }}
         </x-user.create.partials.select>
-        <x-user.create.partials.select x-model="staff_type" :options="\App\Enums\StaffType::toArray()" required>
+        <x-user.create.partials.select x-model="staff_type" :enum="\App\Enums\StaffType::class"
+                                       :options="\App\Enums\StaffType::toArray()" required>
             {{ __('validation.attributes.staff_type') }}
         </x-user.create.partials.select>
-        <x-user.create.partials.select x-model="work_system" :options="\App\Enums\WorkSystem::toArray()" required>
+        <x-user.create.partials.select x-model="work_system" :enum="\App\Enums\WorkSystem::class"
+                                       :options="\App\Enums\WorkSystem::toArray()" required>
             {{ __('validation.attributes.work_system') }}
         </x-user.create.partials.select>
         <x-user.create.partials.input x-model="daily_hours" type="number" min="0" max="10" step="0.25" required>
@@ -72,7 +75,8 @@
         <x-user.create.partials.input x-model="monthly_employee_base_salary" type="number" min="0" step="1" required>
             {{ __('validation.attributes.monthly_employee_base_salary') }}
         </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="monthly_employee_base_salary_hourly" type="number" min="0" step="1" required>
+        <x-user.create.partials.input x-model="monthly_employee_base_salary_hourly" type="number" min="0" step="1"
+                                      required>
             {{ __('validation.attributes.monthly_employee_base_salary_hourly') }}
         </x-user.create.partials.input>
         <x-user.create.partials.input x-model="hourly_employee_base_salary" type="number" min="0" step="1" required>
