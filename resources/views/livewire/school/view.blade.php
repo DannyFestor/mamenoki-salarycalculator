@@ -6,9 +6,11 @@
     </section>
 
 
-    <section class="md:col-span-2 xl:col-span-3 flex justify-end px-4 pt-8">
+    <section class="md:col-span-2 lg:col-span-3 flex justify-end px-4 pt-8">
         <x-form.partials.button>保存</x-form.partials.button>
+    </section>
 </form>
+
 @push('scripts')
     <script>
         document.addEventListener('alpine:init', () => {

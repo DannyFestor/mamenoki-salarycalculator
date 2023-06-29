@@ -1,7 +1,9 @@
 <x-app-layout>
-    <div class="p-4">
-        <a href="{{ route('schools.users.index', ['school' => $school]) }}">≪ ユーザ選択に戻る</a>
-    </div>
+    <x-layouts.breadcrumps :routes="[
+        route('schools.index') => '≪ 施設選択',
+        route('schools.users.index', ['school' => $school]) => '≪ ユーザ選択',
+        route('schools.users.edit', ['school' => $school, 'user' => $user]) => '≪ ' . $user->userData->name . 'の編集',
+    ]" />
 
     <livewire:user.edit :school="$school" :user="$user" />
 </x-app-layout>

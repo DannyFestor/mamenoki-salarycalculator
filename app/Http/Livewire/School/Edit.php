@@ -10,7 +10,7 @@ use Livewire\Redirector;
 class Edit extends Base
 {
 
-    public int $school_uuid;
+    public string $school_uuid;
 
     public function mount(School $school): void
     {

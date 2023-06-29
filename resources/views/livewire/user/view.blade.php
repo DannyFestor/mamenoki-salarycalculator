@@ -117,8 +117,8 @@
         </x-form.partials.input>
     </section>
 
-    <section class="">
-        <button type="submit">SUBMIT</button>
+    <section class="md:col-span-2 lg:col-span-3 mt-8 flex justify-end p-4">
+        <x-form.partials.button type="submit">保存する</x-form.partials.button>
     </section>
 
 {{--    @foreach($errors as $error)--}}
