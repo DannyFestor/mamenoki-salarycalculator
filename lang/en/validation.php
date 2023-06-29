@@ -145,7 +145,6 @@ return [
         'email' => 'Email',
         'last_name' => 'Last Name',
         'first_name' => 'First Name',
-        'is_school_club' => 'Is School Club',
         'birthday' => 'Birthday',
         'start_date' => 'Start Date',
         'end_date' => 'End Date',

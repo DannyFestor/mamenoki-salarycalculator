@@ -1,4 +1,4 @@
-<form x-data="user" @submit.prevent="onSubmit" class="grid md:grid-cols-2 xl:grid-cols-3">
+<form x-data="user" @submit.prevent="onSubmit" class="grid md:grid-cols-2 xl:grid-cols-3 pb-12">
     <section class="flex flex-col gap-4 p-4">
         <h2>基本情報</h2>
 
@@ -10,9 +10,6 @@
         </x-user.create.partials.input>
         <x-user.create.partials.input x-model="first_name" required>
             {{ __('validation.attributes.first_name') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="is_school_club" required>
-            {{ __('validation.attributes.is_school_club') }}
         </x-user.create.partials.input>
         <x-user.create.partials.input x-model="birthday" type="date" required>
             {{ __('validation.attributes.birthday') }}
@@ -120,7 +117,7 @@
         </x-user.create.partials.input>
     </section>
 
-    <section>
+    <section class="">
         <button type="submit">SUBMIT</button>
     </section>
 
@@ -137,7 +134,6 @@
                 'email': @this.entangle('email').defer,
                 'last_name': @this.entangle('last_name').defer,
                 'first_name': @this.entangle('first_name').defer,
-                'is_school_club': @this.entangle('is_school_club').defer,
                 'birthday': @this.entangle('birthday').defer,
                 'start_date': @this.entangle('start_date').defer,
                 'end_date': @this.entangle('end_date').defer,

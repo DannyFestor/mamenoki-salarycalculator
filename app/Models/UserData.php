@@ -13,7 +13,6 @@ class UserData extends Model
         'user_id',
         'last_name',
         'first_name',
-        'is_school_club',
         'birthday',
         'start_date',
         'end_date',
@@ -47,7 +46,6 @@ class UserData extends Model
     ];
 
     protected $casts = [
-        'is_school_club' => 'boolean',
         'has_parking_spot' => 'boolean',
         'has_meal' => 'boolean',
         'has_break' => 'boolean',

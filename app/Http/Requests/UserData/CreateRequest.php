@@ -11,7 +11,6 @@ class CreateRequest extends FormRequest
         return [
             'last_name' => ['required'],
             'first_name' => ['required'],
-            'is_school_club' => ['required'],
             'birthday' => ['required', 'date'],
             'start_date' => ['required', 'date'],
             'end_date' => ['nullable', 'date'],

@@ -20,7 +20,6 @@ class Edit extends Base
         $this->email = $user->email;
         $this->last_name = $user->userData->last_name;
         $this->first_name = $user->userData->first_name;
-        $this->is_school_club = $user->userData->is_school_club;
         $this->birthday = $user->userData->birthday;
         $this->start_date = $user->userData->start_date;
         $this->end_date = $user->userData->end_date;

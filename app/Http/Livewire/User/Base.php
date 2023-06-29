@@ -14,8 +14,6 @@ abstract class Base extends Component
 
     public string $first_name;
 
-    public bool $is_school_club;
-
     public string $birthday;
 
     public string $start_date;

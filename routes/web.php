@@ -29,7 +29,8 @@ Route::middleware('auth')->group(function () {
 });
 
 // TODO: Add to middleware
-Route::get('/user/create', \App\Http\Controllers\User\CreateController::class)->name('user.create');
-Route::get('/user/{user}', \App\Http\Controllers\User\EditController::class)->name('user.edit');
+Route::get('/users', \App\Http\Controllers\User\IndexController::class)->name('user.index');
+Route::get('/users/create', \App\Http\Controllers\User\CreateController::class)->name('user.create');
+Route::get('/users/{user:uuid}', \App\Http\Controllers\User\EditController::class)->name('user.edit');
 
 require __DIR__.'/auth.php';

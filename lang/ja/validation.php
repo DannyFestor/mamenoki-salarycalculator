@@ -145,7 +145,6 @@ return [
         'email' => 'メールアドレス',
         'last_name' => '苗字',
         'first_name' => '名前',
-        'is_school_club' => '学童',
         'birthday' => '生年月日',
         'start_date' => '採用年月日',
         'end_date' => '退勤日',
