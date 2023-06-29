@@ -20,7 +20,7 @@
         <x-user.create.partials.input x-model="start_date" type="date" required>
             {{ __('validation.attributes.start_date') }}
         </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="end_date" required>
+        <x-user.create.partials.input x-model="end_date" type="date" required>
             {{ __('validation.attributes.end_date') }}
         </x-user.create.partials.input>
         <x-user.create.partials.input x-model="employee_number" required>
@@ -31,17 +31,16 @@
     <section class="flex flex-col gap-4 p-4">
         <h2>就労条件</h2>
 
-        <!-- todo: make booleans / switch -->
-        <x-user.create.partials.input x-model="salary_type" required>
+        <x-user.create.partials.select x-model="salary_type" :options="\App\Enums\SalaryType::toArray()" required>
             {{ __('validation.attributes.salary_type') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="staff_type" required>
+        </x-user.create.partials.select>
+        <x-user.create.partials.select x-model="staff_type" :options="\App\Enums\StaffType::toArray()" required>
             {{ __('validation.attributes.staff_type') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="work_system" required>
+        </x-user.create.partials.select>
+        <x-user.create.partials.select x-model="work_system" :options="\App\Enums\WorkSystem::toArray()" required>
             {{ __('validation.attributes.work_system') }}
-        </x-user.create.partials.input>
-        <x-user.create.partials.input x-model="daily_hours" required>
+        </x-user.create.partials.select>
+        <x-user.create.partials.input x-model="daily_hours" type="number" min="0" max="10" step="0.25" required>
             {{ __('validation.attributes.daily_hours') }}
         </x-user.create.partials.input>
         <x-user.create.partials.toggle x-model="has_parking_spot" required>

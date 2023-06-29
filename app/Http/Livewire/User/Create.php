@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\User;
+use App\Models\UserData;
 use Livewire\Component;
 
 class Create extends Component
@@ -49,7 +51,28 @@ class Create extends Component
 
     public function onSubmit(): void
     {
-        $this->validate();
+        $validated = collect($this->validate());
+
+        $password = \Str::password(8, symbols: false);
+
+        \DB::beginTransaction();
+
+        try {
+            $user = User::create([
+                ...$validated->only(['email']),
+                'password' => bcrypt($password),
+            ]);
+
+            $userData = UserData::create([
+                'user_id' => $user->id,
+                ...$validated->except(['email']),
+            ]);
+            \DB::commit();
+        } catch (\Exception $e) {
+            logger()->error($e->getMessage());
+            logger()->error($e->getTraceAsString());
+            \DB::rollBack();
+        }
     }
 
     protected function rules(): array

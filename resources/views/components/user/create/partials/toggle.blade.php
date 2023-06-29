@@ -21,7 +21,7 @@
             @click="data = !data"
             type="button"
             role="switch"
-            :aria-checked="value"
+            :aria-checked="data"
             aria-labelledby="{{ $attributes->get('x-model') }}"
             class="border border-black w-[75px] h-[42px] p-1 rounded-full relative mt-2 transition-all"
             :class="data ? 'bg-black' : 'bg-white'">

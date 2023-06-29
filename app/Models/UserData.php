@@ -10,6 +10,7 @@ class UserData extends Model
     protected $table = 'user_data';
 
     protected $fillable = [
+        'user_id',
         'last_name',
         'first_name',
         'is_school_club',

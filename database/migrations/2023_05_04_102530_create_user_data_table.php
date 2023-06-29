@@ -9,9 +9,10 @@ return new class extends Migration {
     {
         Schema::create('user_data', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->string('last_name'); // "dada",
             $table->string('first_name'); // "baba",
-            $table->string('name')->virtualAs('CONCAT("last_name", "first_name")');
+            $table->string('name')->virtualAs('CONCAT(last_name, " ", first_name)');
             $table->boolean('is_school_club')->default(false); // 学童クラブフラグ
             $table->date('birthday'); // "1980-01-01",
             $table->date('start_date'); // "2015-01-01",
