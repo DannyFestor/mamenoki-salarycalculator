@@ -28,17 +28,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['name' => 'schools', 'as' => 'schools.', 'prefix' => '/schools'], function () {
-    Route::get('/', \App\Http\Controllers\School\IndexController::class)->name('index');
-    Route::get('/create', \App\Http\Controllers\School\CreateController::class)->name('create');
-    Route::get('/{school:uuid}', \App\Http\Controllers\School\EditController::class)->name('edit');
-    Route::group(['name' => 'users', 'as' => 'users.', 'prefix' => '{school:uuid}/users'], function () {
-        Route::get('/', \App\Http\Controllers\User\IndexController::class)->name('index');
-        Route::get('/create', \App\Http\Controllers\User\CreateController::class)->name('create');
-        Route::get('/{user:uuid}', \App\Http\Controllers\User\EditController::class)->name('edit');
-    });
-});
+Route::group(
+    [
+        'name' => 'schools',
+        'as' => 'schools.',
+        'prefix' => '/schools',
+        'middleware' => ['auth', 'role:superadmin,admin'],
+    ],
+    function () {
+        Route::get('/', \App\Http\Controllers\School\IndexController::class)->name('index');
+        Route::get('/create', \App\Http\Controllers\School\CreateController::class)->name('create');
+        Route::get('/{school:uuid}', \App\Http\Controllers\School\EditController::class)->name('edit');
+        Route::group(['name' => 'users', 'as' => 'users.', 'prefix' => '{school:uuid}/users', 'middleware' => ['scopeSchool']], function () {
+            Route::get('/', \App\Http\Controllers\User\IndexController::class)->name('index');
+            Route::get('/create', \App\Http\Controllers\User\CreateController::class)->name('create');
+            Route::get('/{user:uuid}', \App\Http\Controllers\User\EditController::class)->name('edit');
+        });
+    }
+);
 
 // TODO: Add to middleware
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

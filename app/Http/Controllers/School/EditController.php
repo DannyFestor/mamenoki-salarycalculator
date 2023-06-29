@@ -10,7 +10,7 @@ class EditController extends Controller
     public function __invoke(School $school)
     {
         return view('schools.edit', [
-            'school' => $school
+            'school' => $school,
         ]);
     }
 }

@@ -10,10 +10,10 @@ use Livewire\Component;
 class Index extends Component
 {
     public string $school_uuid;
+
     public string $search = '';
 
     protected $queryString = ['search' => ['as' => 's', 'except' => '']];
-
 
     public function mount(School $school)
     {
@@ -29,11 +29,11 @@ class Index extends Component
             ->where('schools.uuid', '=', $this->school_uuid)
             ->when(
                 $this->search,
-                fn(Builder $query) => $query->where(
-                    fn(Builder $query) => $query
-                        ->where('users.email', 'like', '%' . $this->search . '%')
-                        ->orWhere('user_data.last_name', 'like', '%' . $this->search . '%')
-                        ->orWhere('user_data.first_name', 'like', '%' . $this->search . '%')
+                fn (Builder $query) => $query->where(
+                    fn (Builder $query) => $query
+                        ->where('users.email', 'like', '%'.$this->search.'%')
+                        ->orWhere('user_data.last_name', 'like', '%'.$this->search.'%')
+                        ->orWhere('user_data.first_name', 'like', '%'.$this->search.'%')
                 )
             )
             ->get();

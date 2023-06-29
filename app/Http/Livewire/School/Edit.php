@@ -9,7 +9,6 @@ use Livewire\Redirector;
 
 class Edit extends Base
 {
-
     public string $school_uuid;
 
     public function mount(School $school): void
@@ -26,8 +25,8 @@ class Edit extends Base
             $school = School::query()
                 ->where('uuid', '=', $this->school_uuid)
                 ->first();
-            if (!$school) {
-                throw new \Exception('No school found' . $this->school_uuid);
+            if (! $school) {
+                throw new \Exception('No school found'.$this->school_uuid);
             }
 
             $school->update($validated->toArray());

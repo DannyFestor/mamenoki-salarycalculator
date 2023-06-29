@@ -15,7 +15,7 @@ class Index extends Component
     public function render()
     {
         $schools = School::query()
-            ->when($this->search, fn(Builder $query) => $query->where('name', 'like', '%' . $this->search . '%'))
+            ->when($this->search, fn (Builder $query) => $query->where('name', 'like', '%'.$this->search.'%'))
             ->get();
 
         return view('livewire.school.index', [

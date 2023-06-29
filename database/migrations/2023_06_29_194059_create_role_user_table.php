@@ -8,16 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('schools', function (Blueprint $table) {
-            $table->id();
-            $table->uuid()->unique();
-            $table->string('name');
-            $table->timestamps();
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->bigInteger('user_id');
+            $table->bigInteger('role_id');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('schools');
+        Schema::dropIfExists('role_user');
     }
 };

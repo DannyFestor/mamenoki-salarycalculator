@@ -27,8 +27,8 @@ class Create extends Base
             $school = School::query()
                 ->where('uuid', '=', $this->school_uuid)
                 ->first();
-            if (!$school) {
-                throw new \Exception('No school found: ' . $this->school_uuid);
+            if (! $school) {
+                throw new \Exception('No school found: '.$this->school_uuid);
             }
 
             $user = User::create([

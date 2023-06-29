@@ -9,7 +9,6 @@ use Livewire\Redirector;
 
 class Create extends Base
 {
-
     public function onSubmit(): Redirector|RedirectResponse|null
     {
         $validated = collect($this->validate());
