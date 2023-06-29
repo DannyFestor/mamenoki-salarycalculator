@@ -15,6 +15,7 @@ class EditController extends Controller
         $user->load('userData');
 
         return view('user.edit', [
+            'school' => $school,
             'user' => $user,
         ]);
     }

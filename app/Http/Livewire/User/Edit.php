@@ -71,7 +71,10 @@ class Edit extends Base
 
             \DB::commit();
 
-            return redirect()->route('user.edit', ['user' => $user])->with('success', 'ユーザ情報を更新しました。');
+            return redirect()->route('schools.users.index', ['school' => $this->school_uuid])->with(
+                'success',
+                'ユーザ情報を更新しました。'
+            );
         } catch (\Exception $e) {
             logger()->error($e->getMessage());
             logger()->error($e->getTraceAsString());

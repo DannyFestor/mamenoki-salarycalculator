@@ -10,11 +10,11 @@ use Livewire\Redirector;
 class Edit extends Base
 {
 
-    public int $school_id;
+    public int $school_uuid;
 
     public function mount(School $school): void
     {
-        $this->school_id = $school->id;
+        $this->school_uuid = $school->uuid;
         $this->name = $school->name;
     }
 
@@ -23,11 +23,16 @@ class Edit extends Base
         $validated = collect($this->validate());
 
         try {
-            $school = School::find($this->school_id);
+            $school = School::query()
+                ->where('uuid', '=', $this->school_uuid)
+                ->first();
+            if (!$school) {
+                throw new \Exception('No school found' . $this->school_uuid);
+            }
 
             $school->update($validated->toArray());
 
-            return redirect()->route('schools.edit', ['school' => $school])->with('success', '施設を作成しました。');
+            return redirect()->route('schools.index')->with('success', '施設を作成しました。');
         } catch (\Exception $e) {
             logger()->error($e->getMessage());
             logger()->error($e->getTraceAsString());

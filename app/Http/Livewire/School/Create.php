@@ -17,7 +17,7 @@ class Create extends Base
         try {
             $school = School::create($validated->toArray());
 
-            return redirect()->route('schools.edit', ['school' => $school])->with('success', '施設を作成しました。');
+            return redirect()->route('schools.index')->with('success', '施設を作成しました。');
         } catch (\Exception $e) {
             logger()->error($e->getMessage());
             logger()->error($e->getTraceAsString());
