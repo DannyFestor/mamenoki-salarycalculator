@@ -16,7 +16,7 @@
 
         @if(session()->has('success'))
             <section class="my-4 px-4 py-2">
-                <article class="border-2 border-emerald-600 bg-emerald-400 bg-opacity-50 text-emerald-800 font-bold px-4 py-2 rounded">
+                <article class="border-2 border-teal-600 bg-teal-400 bg-opacity-50 text-teal-800 font-bold px-4 py-2 rounded">
                     {{ session()->get('success') }}
                 </article>
             </section>

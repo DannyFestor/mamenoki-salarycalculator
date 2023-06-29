@@ -4,7 +4,7 @@
 
     <div class="flex justify-end items-center gap-2">
         <a href="{{ route('schools.index') }}"
-           class="px-4 py-2 rounded bg-indigo-600 text-indigo-100"
+           class="px-4 py-2 rounded bg-sky-800 text-sky-100"
         >学校選択</a>
     </div>
 </nav>

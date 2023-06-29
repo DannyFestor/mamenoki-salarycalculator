@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Redirector;
@@ -12,8 +13,10 @@ class Edit extends Base
 
     public int $user_data_id;
 
-    public function mount(User $user)
+    public function mount(School $school, User $user)
     {
+        $this->school_uuid = $school->uuid;
+
         $this->user_id = $user->id;
         $this->user_data_id = $user->userData->id;
 
