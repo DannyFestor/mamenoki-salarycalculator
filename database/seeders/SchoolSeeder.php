@@ -9,6 +9,11 @@ class SchoolSeeder extends Seeder
 {
     public function run(): void
     {
-        School::factory(10)->create();
+        School::factory()->create([
+            'name' => '豆の木保育園'
+        ]);
+        School::factory()->create([
+            'name' => 'クレヨンクラブ'
+        ]);
     }
 }
