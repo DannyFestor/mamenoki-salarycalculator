@@ -9,7 +9,6 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireStyles
     </head>
     <body class="font-sans antialiased pt-24">
         @include('layouts.navigation')
@@ -22,11 +21,9 @@
             </section>
         @endif
 
-        <main>
+        <main class="max-w-7xl mx-auto">
             {{ $slot }}
         </main>
-        @livewireScripts
-
-@stack('scripts')
+        @stack('scripts')
     </body>
 </html>

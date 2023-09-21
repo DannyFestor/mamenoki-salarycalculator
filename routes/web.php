@@ -18,15 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+//Route::middleware('auth')->group(function () {
+//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//});
 
 Route::group(
     [
@@ -36,19 +36,23 @@ Route::group(
         'middleware' => ['auth', 'role:superadmin,admin'],
     ],
     function () {
-        Route::get('/', \App\Http\Controllers\School\IndexController::class)->name('index');
-        Route::get('/create', \App\Http\Controllers\School\CreateController::class)->name('create');
-        Route::get('/{school:uuid}', \App\Http\Controllers\School\EditController::class)->name('edit');
-        Route::group(['name' => 'users', 'as' => 'users.', 'prefix' => '{school:uuid}/users', 'middleware' => ['scopeSchool']], function () {
-            Route::get('/', \App\Http\Controllers\User\IndexController::class)->name('index');
-            Route::get('/create', \App\Http\Controllers\User\CreateController::class)->name('create');
-            Route::get('/{user:uuid}', \App\Http\Controllers\User\EditController::class)->name('edit');
+        Route::get('/', \App\Livewire\School\Index::class)->name('index');
+//        Route::get('/create', \App\Http\Controllers\School\CreateController::class)->name('create');
+        Route::get('/{school:uuid}', fn() => view('edit.php'))->name('edit');
+//        Route::get('/{school:uuid}', \App\Http\Controllers\School\EditController::class)->name('edit');
+        Route::group(
+            ['name' => 'users', 'as' => 'users.', 'prefix' => '{school:uuid}/users', 'middleware' => ['scopeSchool']],
+            function () {
+                Route::get('/', \App\Livewire\User\Index::class)->name('index');
+                Route::get('/create', \App\Livewire\User\Create::class)->name('create');
+                Route::get('/{user:uuid}', \App\Livewire\User\Edit::class)->name('edit');
 
             Route::get('/{user:uuid}/work-situation', \App\Http\Controllers\WorkSituationController::class)->name('work-situation');
-        });
+            }
+        );
     }
 );
 
 // TODO: Add to middleware
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

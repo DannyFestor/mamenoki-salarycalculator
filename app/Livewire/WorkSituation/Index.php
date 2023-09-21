@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\WorkSituation;
+namespace App\Livewire\WorkSituation;
 
 use App\Models\User;
 use App\Models\WorkSituation;

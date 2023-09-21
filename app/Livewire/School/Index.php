@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\School;
+namespace App\Livewire\School;
 
 use App\Models\School;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class Index extends Component
 {
+    #[Url(as: 's')]
     public string $search = '';
-
-    protected $queryString = ['search' => ['as' => 's', 'except' => '']];
 
     public function render()
     {

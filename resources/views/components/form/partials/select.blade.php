@@ -1,10 +1,7 @@
 @props(['options', 'enum' => null])
 
-<div x-data="select"
-     x-modelable="data"
-     x-model="{{ $attributes->get('x-model') }}"
-     class="flex flex-col">
-    <label for="{{$attributes->get('x-model')}}"
+<div class="flex flex-col">
+    <label for="{{$attributes->get('wire:model')}}"
            class="flex justify-between">
         <span>{{ $slot }}</span>
 
@@ -13,7 +10,7 @@
         @endif
     </label>
 
-    <select x-model="data"
+    <select wire:model="{{ $attributes->get('wire:model') }}"
             class="form-select rounded mt-2">
         @foreach($options as $value => $label)
             @if($enum !== null)
@@ -24,17 +21,7 @@
         @endforeach
     </select>
 
-    @error($attributes->get('x-model'))
+    @error($attributes->get('wire:model'))
     <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
     @enderror
 </div>
-
-@pushonce('scripts')
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('select', () => ({
-                data: 0,
-            }));
-        });
-    </script>
-@endpushonce

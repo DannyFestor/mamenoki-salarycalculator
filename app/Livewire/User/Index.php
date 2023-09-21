@@ -1,32 +1,32 @@
 <?php
 
-namespace App\Http\Livewire\User;
+namespace App\Livewire\User;
 
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public string $school_uuid;
+    public string $schoolUuid;
 
+    #[Url(as: 's')]
     public string $search = '';
-
-    protected $queryString = ['search' => ['as' => 's', 'except' => '']];
 
     public function mount(School $school)
     {
-        $this->school_uuid = $school->uuid;
+        $this->schoolUuid = $school->uuid;
     }
 
     public function render()
     {
         $users = User::query()
             ->select(['users.id', 'users.uuid', 'users.email', 'user_data.name'])
-            ->leftJoin('schools', 'school_id', '=', 'users.school_id')
+            ->leftJoin('schools', 'schools.id', '=', 'users.school_id')
             ->leftJoin('user_data', 'user_data.user_id', '=', 'users.id')
-            ->where('schools.uuid', '=', $this->school_uuid)
+            ->where('schools.uuid', '=', $this->schoolUuid)
             ->when(
                 $this->search,
                 fn (Builder $query) => $query->where(

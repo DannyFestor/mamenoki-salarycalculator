@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\School;
+namespace App\Livewire\School;
 
 use App\Http\Requests\School\CreateRequest;
 use App\Models\School;

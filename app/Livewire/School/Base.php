@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\School;
+namespace App\Livewire\School;
 
 use Illuminate\Http\RedirectResponse;
 use Livewire\Component;

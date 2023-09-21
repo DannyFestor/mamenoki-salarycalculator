@@ -1,21 +1,18 @@
 @props(['type' => 'text'])
 
-<div x-data="input"
-     x-modelable="data"
-     x-model="{{ $attributes->get('x-model') }}"
-     class="flex flex-col">
-    <label for="{{$attributes->get('x-model')}}" class="flex justify-between">
+<div class="flex flex-col">
+    <label for="{{$attributes->get('wire:model')}}" class="flex justify-between">
         {{ $slot }}
 
         @if($attributes->has('required'))
-           <span class="text-red-500 ml-4">必須</span>
+            <span class="text-red-500 ml-4">必須</span>
         @endif
     </label>
 
     <input type="{{ $type }}"
-           id="{{ $attributes->get('x-model') }}"
-           name="{{ $attributes->get('x-model') }}"
-           x-model="data"
+           id="{{ $attributes->get('wire:model') }}"
+           name="{{ $attributes->get('wire:model') }}"
+           wire:model="{{ $attributes->get('wire:model') }}"
            @if($attributes->has('required'))
                required
            aria-required="true"
@@ -32,20 +29,10 @@
                step="{{ $attributes->get('step') }}"
            aria-step="{{ $attributes->get('step') }}"
            @endif
-           aria-labelledby="{{ $attributes->get('x-model') }}"
+           aria-labelledby="{{ $attributes->get('wire:model') }}"
            class="form-input rounded mt-2">
 
-    @error($attributes->get('x-model'))
-    <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
+    @error($attributes->get('wire:model'))
+        <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
     @enderror
 </div>
-
-@pushonce('scripts')
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('input', () => ({
-                data: null,
-            }));
-        });
-    </script>
-@endpushonce
