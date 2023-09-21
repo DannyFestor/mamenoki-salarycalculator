@@ -45,9 +45,9 @@ Route::group(
             function () {
                 Route::get('/', \App\Livewire\User\Index::class)->name('index');
                 Route::get('/create', \App\Livewire\User\Create::class)->name('create');
-                Route::get('/{user:uuid}', \App\Livewire\User\Edit::class)->name('edit');
+                Route::get('/{user:uuid}/edit', \App\Livewire\User\Edit::class)->name('edit');
 
-            Route::get('/{user:uuid}/work-situation', \App\Http\Controllers\WorkSituationController::class)->name('work-situation');
+                Route::get('/{user:uuid}/work-situation', \App\Livewire\WorkSituation\Index::class)->name('work-situation');
             }
         );
     }

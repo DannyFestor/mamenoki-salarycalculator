@@ -6,6 +6,7 @@ use App\Livewire\Forms\UserForm;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\Features\SupportRedirects\Redirector;
 
@@ -13,10 +14,13 @@ class Edit extends Component
 {
     public UserForm $form;
 
+    #[Locked]
     public string $schoolUuid;
 
+    #[Locked]
     public int $userId;
 
+    #[Locked]
     public int $userDataId;
 
     public function mount(School $school, User $user): void
