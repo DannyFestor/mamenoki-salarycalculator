@@ -43,6 +43,8 @@ Route::group(
             Route::get('/', \App\Http\Controllers\User\IndexController::class)->name('index');
             Route::get('/create', \App\Http\Controllers\User\CreateController::class)->name('create');
             Route::get('/{user:uuid}', \App\Http\Controllers\User\EditController::class)->name('edit');
+
+            Route::get('/{user:uuid}/work-situation', \App\Http\Controllers\WorkSituationController::class)->name('work-situation');
         });
     }
 );
