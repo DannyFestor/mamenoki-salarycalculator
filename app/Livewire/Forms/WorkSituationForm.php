@@ -82,7 +82,7 @@ class WorkSituationForm extends Form
 
     public function setWorkSituation(WorkSituation $workSituation): void
     {
-        $this->payment_at = $workSituation->payment_at->format('Y-m-d');
+        $this->payment_at = $workSituation->payment_at?->format('Y-m-d');
         $this->days_worked = $workSituation->days_worked;
         $this->vacation_full_days = $workSituation->vacation_full_days;
         $this->vacation_half_days = $workSituation->vacation_half_days;
@@ -106,5 +106,17 @@ class WorkSituationForm extends Form
         $this->overtime_over_8_hours = $workSituation->overtime_over_8_hours;
         $this->overtime_under_8_hours = $workSituation->overtime_under_8_hours;
         $this->comment = $workSituation->comment;
+    }
+
+    public function save(int $user_id, int $year, int $month)
+    {
+        $values = $this->validate();
+
+        WorkSituation::query()
+            ->updateOrInsert([
+                'user_id' => $user_id,
+                'year' => $year,
+                'month' => $month,
+            ], $values);
     }
 }

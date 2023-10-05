@@ -80,4 +80,13 @@ class Index extends Component
             $this->month = 1;
         }
     }
+
+    public function onSubmit(): void
+    {
+        $this->form->save(
+            $this->user_id,
+            $this->year ?? now()->year,
+            $this->month ?? now()->month
+        );
+    }
 }

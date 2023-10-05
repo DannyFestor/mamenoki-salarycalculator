@@ -31,6 +31,8 @@
     </form>
 
     <form wire:submit="onSubmit" class="border rounded p-4 flex flex-col gap-4">
+        <h1>{{ $year }}年{{ $month }}月分</h1>
+
         <x-form.partials.input type="date" wire:model="form.payment_at">
             支払日
         </x-form.partials.input>
@@ -128,13 +130,10 @@
             備考
         </x-form.partials.textarea>
 
+        <div>
+            <button type="submit">SAVE</button>
+        </div>
     </form>
-
-    <div>{{ $user_id }}</div>
-    <div>{{ $year }}</div>
-    <div>{{ $month }}</div>
-
-    <div>@js($form)</div>
 </div>
 
 @pushonce('scripts')
