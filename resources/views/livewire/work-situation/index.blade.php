@@ -1,32 +1,37 @@
-<div>
+<div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+    <form @submit.prevent="updateLivewire" x-data="workSituation"
+          class="border rounded flex flex-col justify-start gap-4 p-4">
+        <div class="flex gap-4 w-full">
+            <div class="flex-1 flex flex-col justify-center items-center gap-2">
+                <div @click="month++"
+                     class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
+                    &uarr;
+                </div>
+                <input x-model.number="month" type="number" min="0" max="13"
+                       class="w-full form-input rounded text-right">
+                <div @click="month--"
+                     class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
+                    &darr;
+                </div>
+            </div>
+            <div class="flex-1 flex flex-col justify-center items-center gap-2">
+                <div @click="year++"
+                     class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
+                    &uarr;
+                </div>
+                <input x-model.number="year" type="number" min="2000" max="{{ now()->year }}"
+                       class="w-full form-input rounded text-right">
+                <div @click="year--"
+                     class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
+                    &darr;
+                </div>
+            </div>
+        </div>
 
-    <form @submit.prevent="updateLivewire" x-data="workSituation" class="flex gap-4">
-        <div class="w-[96px] flex flex-col justify-center items-center gap-2">
-            <div @click="month++"
-                 class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
-                &uarr;
-            </div>
-            <input x-model.number="month" type="number" min="0" max="13"
-                   class="w-full form-input rounded text-right">
-            <div @click="month--"
-                 class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
-                &darr;
-            </div>
-        </div>
-        <div class="w-[96px] flex flex-col justify-center items-center gap-2">
-            <div @click="year++"
-                 class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
-                &uarr;
-            </div>
-            <input x-model.number="year" type="number" min="2000" max="{{ now()->year }}"
-                   class="w-full form-input rounded text-right">
-            <div @click="year--"
-                 class="w-full border  text-center px-4 py-2 rounded hover:bg-black hover:bg-opacity-20 cursor-pointer">
-                &darr;
-            </div>
-        </div>
         <div>
-            <button type="submit">Update</button>
+            <button type="submit"
+                    x-text="year + '年' + month + '月を選択'"
+                    class="w-full bg-sky-800 text-sky-100 rounded px-4 py-2"></button>
         </div>
     </form>
 
@@ -131,9 +136,14 @@
         </x-form.partials.textarea>
 
         <div>
-            <button type="submit">SAVE</button>
+            <button type="submit"
+                    class="w-full bg-sky-800 text-sky-100 rounded px-4 py-2">
+                保存する
+            </button>
         </div>
     </form>
+
+    <div class="border rounded p-4">自動精算エリア</div>
 </div>
 
 @pushonce('scripts')
