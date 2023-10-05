@@ -25,6 +25,6 @@ class UserSeeder extends Seeder
         }
 
         $users = User::whereNot('id', $user->id)->get();
-        $users->each(fn (User $user) => $user->roles()->attach($teacherRole));
+        $users->each(fn(User $user) => $user->roles()->attach($teacherRole));
     }
 }

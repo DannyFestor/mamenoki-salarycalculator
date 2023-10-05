@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('welcome');
 });
 
@@ -35,14 +35,14 @@ Route::group(
         'prefix' => '/schools',
         'middleware' => ['auth', 'role:superadmin,admin'],
     ],
-    function () {
+    function() {
         Route::get('/', \App\Livewire\School\Index::class)->name('index');
-//        Route::get('/create', \App\Http\Controllers\School\CreateController::class)->name('create');
+        //        Route::get('/create', \App\Http\Controllers\School\CreateController::class)->name('create');
         Route::get('/{school:uuid}', fn() => view('edit.php'))->name('edit');
-//        Route::get('/{school:uuid}', \App\Http\Controllers\School\EditController::class)->name('edit');
+        //        Route::get('/{school:uuid}', \App\Http\Controllers\School\EditController::class)->name('edit');
         Route::group(
             ['name' => 'users', 'as' => 'users.', 'prefix' => '{school:uuid}/users', 'middleware' => ['scopeSchool']],
-            function () {
+            function() {
                 Route::get('/', \App\Livewire\User\Index::class)->name('index');
                 Route::get('/create', \App\Livewire\User\Create::class)->name('create');
                 Route::get('/{user:uuid}/edit', \App\Livewire\User\Edit::class)->name('edit');

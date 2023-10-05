@@ -29,11 +29,11 @@ class Index extends Component
             ->where('schools.uuid', '=', $this->schoolUuid)
             ->when(
                 $this->search,
-                fn (Builder $query) => $query->where(
-                    fn (Builder $query) => $query
-                        ->where('users.email', 'like', '%'.$this->search.'%')
-                        ->orWhere('user_data.last_name', 'like', '%'.$this->search.'%')
-                        ->orWhere('user_data.first_name', 'like', '%'.$this->search.'%')
+                fn(Builder $query) => $query->where(
+                    fn(Builder $query) => $query
+                        ->where('users.email', 'like', '%' . $this->search . '%')
+                        ->orWhere('user_data.last_name', 'like', '%' . $this->search . '%')
+                        ->orWhere('user_data.first_name', 'like', '%' . $this->search . '%')
                 )
             )
             ->get();

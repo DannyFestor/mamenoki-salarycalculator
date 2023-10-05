@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Enums\SalaryType;
 use App\Enums\StaffType;
 use App\Enums\WorkSystem;
-use App\Models\User;
 use App\Models\UserData;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;

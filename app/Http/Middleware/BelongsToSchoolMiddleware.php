@@ -13,7 +13,7 @@ class BelongsToSchoolMiddleware
         $user = $request->user();
 
         if (
-            ! $user->roles->contains('slug', '=', 'superadmin') &&
+            !$user->roles->contains('slug', '=', 'superadmin') &&
             $user->school_id !== $request->route('school')->id
         ) {
             abort(Response::HTTP_FORBIDDEN);

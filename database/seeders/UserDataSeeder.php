@@ -12,6 +12,6 @@ class UserDataSeeder extends Seeder
     {
         $users = User::all();
 
-        $users->each(fn (User $user) => UserData::factory()->for($user)->create());
+        $users->each(fn(User $user) => UserData::factory()->for($user)->create());
     }
 }

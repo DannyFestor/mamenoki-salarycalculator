@@ -15,7 +15,7 @@ class WorkSituationSeeder extends Seeder
         $users = User::all();
 
         foreach ($payment_dates->toArray() as $payment_date) {
-            $users->each(fn (User $user) => WorkSituation::factory()->for($user)->create([
+            $users->each(fn(User $user) => WorkSituation::factory()->for($user)->create([
                 'year' => $payment_date->year,
                 'month' => $payment_date->month,
                 'payment_at' => $payment_date,
