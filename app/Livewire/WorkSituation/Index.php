@@ -22,9 +22,14 @@ class Index extends Component
     #[Url]
     public ?int $month = null;
 
+    #[Locked]
+    public float $dailyHours = 0;
+
     public function mount(User $user): void
     {
         $this->user_id = $user->id;
+
+        $this->dailyHours = $user->userData->daily_hours;
 
         if (!$this->year) {
             $this->year = now()->year;

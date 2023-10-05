@@ -143,7 +143,19 @@
         </div>
     </form>
 
-    <div class="border rounded p-4">自動精算エリア</div>
+    <div class="border rounded p-4 flex flex-col gap-4">
+        自動精算エリア
+
+        <x-form.partials.input wire:model="form.salary_working_days_with_vacation">
+            A.給与明細に記載する有休休暇を含む勤務日数<br>
+            実際に勤務した日数＋在宅勤務日数＋有休日数ー無給休暇日数ー欠勤日数
+        </x-form.partials.input>
+
+        <x-form.partials.input wire:model="form.salary_working_hours_with_vacation">
+            B.給与明細に記載する有休休暇を含む勤務時間<br>
+            （A×1日の出勤時間+いつもより多め勤務の追加時間-無給休暇時間-欠勤時間-臨時休園した時間）
+        </x-form.partials.input>
+    </div>
 </div>
 
 @pushonce('scripts')
@@ -152,6 +164,46 @@
             Alpine.data('workSituation', () => ({
                 year: @entangle('year'),
                 month: @entangle('month'),
+
+                days_worked: @entangle('form.days_worked'),
+                work_at_home_days: @entangle('form.work_at_home_days'),
+                vacation_full_days: @entangle('form.vacation_full_days'),
+                leave_without_pay_days: @entangle('form.leave_without_pay_days'),
+                absence_days: @entangle('form.absence_days'),
+                salary_working_days_with_vacation: @entangle('form.salary_working_days_with_vacation'),
+
+                daily_hours: @js($dailyHours),
+                additional_hours: @entangle('form.additional_hours'),
+                temporary_holiday_closure_hours: @entangle('form.temporary_holiday_closure_hours'),
+                leave_without_pay_hours: @entangle('form.leave_without_pay_hours'),
+                absence_hours: @entangle('form.absence_hours'),
+                salary_working_hours_with_vacation: @entangle('form.salary_working_hours_with_vacation'),
+
+                recalculateSalaryWorkingDaysWithVacation() {
+                    const days_worked = isNaN(this.days_worked) ? 0 : parseInt(this.days_worked);
+                    const work_at_home_days = isNaN(this.work_at_home_days) ? 0 : parseInt(this.work_at_home_days);
+                    const vacation_full_days = isNaN(this.vacation_full_days) ? 0 : parseInt(this.vacation_full_days);
+                    const leave_without_pay_days = isNaN(this.leave_without_pay_days) ? 0 : parseInt(this.leave_without_pay_days);
+                    const absence_days = isNaN(this.absence_days) ? 0 : parseInt(this.absence_days);
+                    this.salary_working_days_with_vacation = days_worked
+                        + work_at_home_days
+                        + vacation_full_days
+                        - leave_without_pay_days
+                        - absence_days;
+                },
+
+                recalculateSalaryWorkingHoursWithVacation() {
+                    const daily_hours = isNaN(this.daily_hours) ? 0 : parseFloat(this.daily_hours);
+                    const additional_hours = isNaN(this.additional_hours) ? 0 : parseFloat(this.additional_hours);
+                    const temporary_holiday_closure_hours = isNaN(this.temporary_holiday_closure_hours) ? 0 : parseFloat(this.temporary_holiday_closure_hours);
+                    const leave_without_pay_hours = isNaN(this.leave_without_pay_hours) ? 0 : parseFloat(this.leave_without_pay_hours);
+                    const absence_hours = isNaN(this.absence_hours) ? 0 : parseFloat(this.absence_hours);
+                    this.salary_working_hours_with_vacation = this.salary_working_days_with_vacation * daily_hours
+                        + additional_hours
+                        - temporary_holiday_closure_hours
+                        - leave_without_pay_hours
+                        - absence_hours;
+                },
 
                 init() {
                     this.$watch('year', (v) => {
@@ -183,6 +235,38 @@
                             this.year = {{ now()->year }};
                             this.month = {{ now()->month }};
                         }
+                    });
+
+                    this.$watch('days_worked', (v) => {
+                        this.recalculateSalaryWorkingDaysWithVacation();
+                    });
+                    this.$watch('leave_without_pay_days', (v) => {
+                        this.recalculateSalaryWorkingDaysWithVacation();
+                    });
+                    this.$watch('work_at_home_days', (v) => {
+                        this.recalculateSalaryWorkingDaysWithVacation();
+                    });
+                    this.$watch('vacation_full_days', (v) => {
+                        this.recalculateSalaryWorkingDaysWithVacation();
+                    });
+                    this.$watch('absence_days', (v) => {
+                        this.recalculateSalaryWorkingDaysWithVacation();
+                    });
+
+                    this.$watch('salary_working_days_with_vacation', () => {
+                        this.recalculateSalaryWorkingHoursWithVacation();
+                    });
+                    this.$watch('additional_hours', () => {
+                        this.recalculateSalaryWorkingHoursWithVacation();
+                    });
+                    this.$watch('temporary_holiday_closure_hours', () => {
+                        this.recalculateSalaryWorkingHoursWithVacation();
+                    });
+                    this.$watch('leave_without_pay_hours', () => {
+                        this.recalculateSalaryWorkingHoursWithVacation();
+                    });
+                    this.$watch('absence_hours', () => {
+                        this.recalculateSalaryWorkingHoursWithVacation();
                     });
                 },
 

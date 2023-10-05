@@ -80,6 +80,21 @@ class WorkSituationForm extends Form
     #[Rule(['nullable', 'string'])]
     public ?string $comment = null;
 
+    #[Rule(['nullable', 'numeric', 'min:0'])]
+    public ?int $salary_working_days_with_vacation = null;
+
+    #[Rule(['nullable', 'numeric', 'min:0'])]
+    public ?int $salary_working_hours_with_vacation = null;
+
+    #[Rule(['nullable', 'numeric', 'min:0'])]
+    public ?int $salary_overtime_payment_over_8_hours = null;
+
+    #[Rule(['nullable', 'numeric', 'min:0'])]
+    public ?int $salary_overtime_payment_under_8_hours = null;
+
+    #[Rule(['nullable', 'numeric', 'min:0'])]
+    public ?int $salary_travel_expenses = null;
+
     public function setWorkSituation(WorkSituation $workSituation): void
     {
         $this->payment_at = $workSituation->payment_at?->format('Y-m-d');
@@ -106,6 +121,12 @@ class WorkSituationForm extends Form
         $this->overtime_over_8_hours = $workSituation->overtime_over_8_hours;
         $this->overtime_under_8_hours = $workSituation->overtime_under_8_hours;
         $this->comment = $workSituation->comment;
+
+        $this->salary_working_days_with_vacation = $workSituation->salary_working_days_with_vacation;
+        $this->salary_working_hours_with_vacation = $workSituation->salary_working_hours_with_vacation;
+        $this->salary_overtime_payment_over_8_hours = $workSituation->salary_overtime_payment_over_8_hours;
+        $this->salary_overtime_payment_under_8_hours = $workSituation->salary_overtime_payment_under_8_hours;
+        $this->salary_travel_expenses = $workSituation->salary_travel_expenses;
     }
 
     public function save(int $user_id, int $year, int $month)
