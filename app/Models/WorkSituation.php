@@ -39,6 +39,11 @@ class WorkSituation extends Model
         'overtime_over_8_hours',
         'overtime_under_8_hours',
         'comment',
+        'salary_working_days_with_vacation',
+        'salary_working_hours_with_vacation',
+        'salary_overtime_payment_over_8_hours',
+        'salary_overtime_payment_under_8_hours',
+        'salary_travel_expenses',
     ];
 
     protected $casts = [
